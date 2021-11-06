@@ -1,10 +1,9 @@
 import React from 'react'
 
-import { ExampleComponent } from 'react-fullscreen'
-import 'react-fullscreen/dist/index.css'
+import Gallery from './Gallery'
 
 const App = () => {
-  return <ExampleComponent text="Create React Library Example 😄" />
+  return <Gallery />
 }
 
 export default App
