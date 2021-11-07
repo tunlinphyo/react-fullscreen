@@ -20,7 +20,7 @@ function useToggleWithKeys(keyCodes, callback) {
   const nodes = ['INPUT', 'TEXTAREA']
 
   useEffect(() => {
-    const handkeKeydown = ({ metaKey, ctrlKey, altKey, keyCode }) => {
+    const handkeKeydown = ({ target, metaKey, ctrlKey, altKey, keyCode }) => {
       if (nodes.includes(target.nodeName)) return // disable on input
       if (!ctrlKey && !metaKey && !altKey && keyCodes.includes(keyCode)) callback() // toggel fullscreen with keys
     }
