@@ -16,9 +16,9 @@ npm install --save react-fullscreen
 import React, { useEffect, useRef } from "react"
 import useFullscreen from "react-fullscreen"
 
-const nodes = ['INPUT', 'TEXTAREA']
-
 function useToggleWithKeys(keyCodes, callback) {
+  const nodes = ['INPUT', 'TEXTAREA']
+
   useEffect(() => {
     const handkeKeydown = ({ metaKey, ctrlKey, altKey, keyCode }) => {
       if (nodes.includes(target.nodeName)) return // disable on input
