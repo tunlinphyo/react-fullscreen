@@ -1,21 +1,26 @@
 import React, { useEffect, useRef } from "react"
 import useFullscreen from "react-fullscreen"
 
+function useToggleWithKeys(keyCodes, callback) {
+  const nodes = ['INPUT', 'TEXTAREA']
+
+  useEffect(() => {
+    const handkeKeydown = ({ target, metaKey, ctrlKey, altKey, keyCode }) => {
+      if (nodes.includes(target.nodeName)) return // disable on input
+      if (!ctrlKey && !metaKey && !altKey && keyCodes.includes(keyCode)) callback() // toggel fullscreen with keys
+    }
+    window.addEventListener('keydown', handkeKeydown)
+    return () => window.removeEventListener('keydown', handkeKeydown)
+  }, [])
+}
+
 export default function Gallery() {
   const galleryEl = useRef()
   const {
     isFullscreen, isFullScreenMode,
     openFullscreen, closeFullscreen
   } = useFullscreen()
-
-  useEffect(() => {
-    const handkeKeydown = ({ metaKey, ctrlKey, altKey, keyCode }) => {
-      if (!ctrlKey && !metaKey && !altKey && keyCode == 70) toggleFullscreen() // toggel fullscreen with F key
-    }
-    window.addEventListener('keydown', handkeKeydown)
-    return () => window.removeEventListener('keydown', handkeKeydown)
-  }, [])
-
+  useToggleWithKeys([70], toggleFullscreen) // F Key
 
   function toggleFullscreen() {
     if (isFullScreenMode()) closeFullscreen()
